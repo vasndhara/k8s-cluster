@@ -192,6 +192,37 @@ kubectl get nodes
 
 ```
 
+Here's a step-by-step guide to creating a Kubernetes (k8s) cluster using kubeadm and setting up monitoring with Grafana and Prometheus:
+
+Create a Kubernetes Cluster with kubeadm
+
+1. Install kubeadm:
+    - On Ubuntu/Debian: sudo apt install kubeadm
+    - On CentOS/RHEL: sudo yum install kubeadm
+
+2. Initialize the cluster:
+    - sudo kubeadm init --pod-network-cidr 10.244.0.0/16 (choose a pod network CIDR)
+
+3. Join worker nodes (if you have multiple machines):
+    - sudo kubeadm join <master-ip>:8443 --token <token> --discovery-token-ca-cert-hash <hash>
+
+# Setup monitoring with Grafana and prometheus
+
+1.Install prometheus:
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus prometheus-community/prometheus
+kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-ext
+minikube service prometheus-server-ext
+
+2,Install Grafana:
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+helm install grafana stable/grafana
+kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-ext
+
+kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
 
 
 

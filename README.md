@@ -220,6 +220,9 @@ helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
 helm install grafana stable/grafana
 kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-ext
+![k8-1](https://github.com/user-attachments/assets/5cd15ac5-a509-484b-a07b-1ef47361b593)
+
+
 
 kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 

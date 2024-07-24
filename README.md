@@ -132,10 +132,10 @@ bash
 sudo apt-mark hold kubelet kubeadm kubectl
 
 completed the installation of Kubernetes on your Ubuntu system. Now you're ready to dive into the exciting world of container orchestration!
-# On the Kube master server (` Master Only `)
+# on the kube master only (` Master Only `)
 bash
 
-# Initialising the control-plane node run the below command on the (master node)
+# Initialising the control-plane node run  the below command on the (master node)
 sudo kubeadm init
 
 # If we get error wrt container runtime not running , execute the below commands
